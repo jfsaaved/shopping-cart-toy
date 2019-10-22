@@ -12,7 +12,6 @@ public class BookService {
 
     @Autowired
     public BookService(BookRepository bookRepository){
-        super();
         this.bookRepository = bookRepository;
     }
 

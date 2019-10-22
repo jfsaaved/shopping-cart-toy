@@ -1,8 +1,11 @@
 package com.jfsaaved.shopping;
 
 import com.jfsaaved.shopping.modules.Book;
+import com.jfsaaved.shopping.modules.CD;
 import com.jfsaaved.shopping.modules.enums.BookAvailability;
+import com.jfsaaved.shopping.modules.enums.CDGenre;
 import com.jfsaaved.shopping.service.BookService;
+import com.jfsaaved.shopping.service.CDService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
@@ -12,15 +15,18 @@ import java.math.BigDecimal;
 public class DataLoader {
 
     private BookService bookService;
+    private CDService cdService;
 
     @Autowired
-    public DataLoader(BookService bookService) {
+    public DataLoader(BookService bookService, CDService cdService) {
         this.bookService = bookService;
+        this.cdService = cdService;
     }
 
     @PostConstruct
     public void loadDate(){
         loadBooks();
+        loadCDs();
     }
 
     private void loadBooks() {
@@ -65,6 +71,33 @@ public class DataLoader {
         bookService.save(book3);
         bookService.save(book4);
         bookService.save(book5);
+    }
+
+    private void loadCDs(){
+        CD cd1 = new CD("Portrait in Jazz","B0012X6FR6")
+                .withPrice(BigDecimal.valueOf(16.75))
+                .withArtist("Bill Evans")
+                .withCDGenre(CDGenre.JAZZ)
+                .withLabel("Universal Music Canada")
+                .withImgUrl("https://images-na.ssl-images-amazon.com/images/I/71dFfKovRmL._SL1199_.jpg");
+
+        CD cd2 = new CD("Kind of Blue", "B0041TM5OU")
+                .withPrice(BigDecimal.valueOf(34.10))
+                .withArtist("Miles Davis")
+                .withCDGenre(CDGenre.JAZZ)
+                .withLabel("Sony Music Canada Entertainment Inc.")
+                .withImgUrl("https://images-na.ssl-images-amazon.com/images/I/81CP1j-zprL._SL1500_.jpg");
+
+        CD cd3 = new CD("Blue Train", "B00HG30CD4")
+                .withPrice(BigDecimal.valueOf(24.99))
+                .withArtist("John Coltrane")
+                .withCDGenre(CDGenre.JAZZ)
+                .withLabel("Universal Music Canada")
+                .withImgUrl("https://images-na.ssl-images-amazon.com/images/I/81RQvViP0dL._SL1400_.jpg");
+
+        cdService.save(cd1);
+        cdService.save(cd2);
+        cdService.save(cd3);
     }
 
 }

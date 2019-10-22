@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html lang="en"
+      xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layouts/main.html}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Shopping Cart - Julian Saavedra</title>
+</head>
+
+<body>
+
+<div layout:fragment="content">
+    <table class="table table-hover">
+        <thead>
+        <th></th>
+        <th>ID</th>
+        <th>CD Title</th>
+        <th>ASIN</th>
+        <th>Price</th>
+        <th>Artist</th>
+        </thead>
+        <tbody>
+        <tr th:each="cd : ${cds}">
+            <td><img th:src="${cd.imgUrl}" class="img-fluid" style="width:75px; height;225px" ></td>
+            <td th:text="${cd.id}"></td>
+            <td th:text="${cd.name}"></td>
+            <td th:text="${cd.asin}"></td>
+            <td th:text="'$' + ${cd.price}"></td>
+            <td th:text="${cd.artist}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

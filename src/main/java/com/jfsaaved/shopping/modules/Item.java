@@ -3,6 +3,7 @@ package com.jfsaaved.shopping.modules;
 import com.jfsaaved.shopping.modules.enums.ItemType;
 import com.jfsaaved.shopping.modules.enums.WarrantyType;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;

@@ -4,6 +4,7 @@ import com.jfsaaved.shopping.modules.enums.BookAvailability;
 import com.jfsaaved.shopping.modules.enums.BookGenre;
 import com.jfsaaved.shopping.modules.enums.ItemType;
 import com.jfsaaved.shopping.modules.enums.WarrantyType;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
 import java.math.BigDecimal;
@@ -15,6 +16,7 @@ public class Book extends Item{
     private BookGenre genre;
     private String isbn;
     private String author;
+    @DateTimeFormat(pattern="MM/dd/yyyy HH:mm:ss")
     private Date datePublished;
     private int pages;
     private BookAvailability bookAvailability;
@@ -58,26 +60,31 @@ public class Book extends Item{
         return this;
     }
 
+    @Override
     public Book withWarrantyType(WarrantyType warrantyType) {
         this.warrantyType = warrantyType;
         return this;
     }
 
+    @Override
     public Book withDiscount(BigDecimal discount) {
         this.discount = discount;
         return this;
     }
 
+    @Override
     public Book withPrice(BigDecimal price) {
         this.price = price;
         return this;
     }
 
+    @Override
     public Book withDescription(String description){
         this.description = description;
         return this;
     }
 
+    @Override
     public Book withImgUrl(String imgUrl){
         this.imgUrl = imgUrl;
         return this;

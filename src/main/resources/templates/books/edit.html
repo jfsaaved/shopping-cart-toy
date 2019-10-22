@@ -1,0 +1,133 @@
+<!DOCTYPE HTML>
+<html lang="en"
+      xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layouts/main.html}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Shopping Cart - Julian Saavedra</title>
+</head>
+
+<body>
+
+<div layout:fragment="content">
+    <h2 th:text="${book.name} + ' Details'">Details</h2>
+    <img th:src="${book.imgUrl}" class="img-fluid" style="width:75px; height;225px" >
+
+    <form class="form-horizontal" th:object="${book}" th:action="@{/books/save}" method="post">
+
+        <input type="hidden" th:field="*{id}"/>
+
+        <div class="form-group" th:classappend="${#fields.hasErrors('name')}? 'has-error'">
+            <label class="col-sm-2 control-label">Name: </label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" th:field="*{name}"/>
+                <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" th:class="help-block">Name Errors</span>
+            </div>
+        </div>
+
+        <div class="form-group" th:classappend="${#fields.hasErrors('description')}? 'has-error'">
+            <label class="col-sm-2 control-label">Description: </label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" th:field="*{description}"/>
+                <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}" th:class="help-block">Description Errors</span>
+            </div>
+        </div>
+
+        <div class="form-group" th:classappend="${#fields.hasErrors('price')}? 'has-error'">
+            <label class="col-sm-2 control-label">Price: </label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" th:field="*{price}"/>
+                <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}" th:class="help-block">Price Errors</span>
+            </div>
+        </div>
+
+        <div class="form-group" th:classappend="${#fields.hasErrors('discount')}? 'has-error'">
+            <label class="col-sm-2 control-label">Discount: </label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" th:field="*{discount}"/>
+                <span th:if="${#fields.hasErrors('discount')}" th:errors="*{discount}" th:class="help-block">Discount Errors</span>
+            </div>
+        </div>
+
+        <div class="form-group" th:classappend="${#fields.hasErrors('warrantyType')}? 'has-error'">
+            <label class="col-sm-2 control-label">Warranty: </label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" th:field="*{warrantyType}"/>
+                <span th:if="${#fields.hasErrors('warrantyType')}" th:errors="*{warrantyType}" th:class="help-block">Warranty Errors</span>
+            </div>
+        </div>
+
+        <div class="form-group" th:classappend="${#fields.hasErrors('itemType')}? 'has-error'">
+            <label class="col-sm-2 control-label">Item Type: </label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" th:field="*{itemType}"/>
+                <span th:if="${#fields.hasErrors('itemType')}" th:errors="*{itemType}" th:class="help-block">Item Type Errors</span>
+            </div>
+        </div>
+
+        <div class="form-group" th:classappend="${#fields.hasErrors('imgUrl')}? 'has-error'">
+            <label class="col-sm-2 control-label">Image URL: </label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" th:field="*{imgUrl}"/>
+                <span th:if="${#fields.hasErrors('imgUrl')}" th:errors="*{imgUrl}" th:class="help-block">Image URL Errors</span>
+            </div>
+        </div>
+
+        <div class="form-group" th:classappend="${#fields.hasErrors('genre')}? 'has-error'">
+            <label class="col-sm-2 control-label">Genre: </label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" th:field="*{genre}"/>
+                <span th:if="${#fields.hasErrors('genre')}" th:errors="*{genre}" th:class="help-block">Genre Errors</span>
+            </div>
+        </div>
+
+        <div class="form-group" th:classappend="${#fields.hasErrors('isbn')}? 'has-error'">
+            <label class="col-sm-2 control-label">ISBN: </label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" th:field="*{isbn}"/>
+                <span th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}" th:class="help-block">ISBN Errors</span>
+            </div>
+        </div>
+
+        <div class="form-group" th:classappend="${#fields.hasErrors('author')}? 'has-error'">
+            <label class="col-sm-2 control-label">Author: </label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" th:field="*{author}"/>
+                <span th:if="${#fields.hasErrors('author')}" th:errors="*{author}" th:class="help-block">Author Errors</span>
+            </div>
+        </div>
+
+        <div class="form-group" th:classappend="${#fields.hasErrors('datePublished')}? 'has-error'">
+            <label class="col-sm-2 control-label">Date Published: </label>
+            <div class="col-md-10">
+                <input type="datetime" class="form-control" th:field="*{datePublished}"/>
+                <span th:if="${#fields.hasErrors('datePublished')}" th:errors="*{datePublished}" th:class="help-block">Date Published Errors</span>
+            </div>
+        </div>
+
+        <div class="form-group" th:classappend="${#fields.hasErrors('pages')}? 'has-error'">
+            <label class="col-sm-2 control-label">Pages: </label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" th:field="*{pages}"/>
+                <span th:if="${#fields.hasErrors('pages')}" th:errors="*{pages}" th:class="help-block">Pages Errors</span>
+            </div>
+        </div>
+
+        <div class="form-group" th:classappend="${#fields.hasErrors('bookAvailability')}? 'has-error'">
+            <label class="col-sm-2 control-label">Book Availability: </label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" th:field="*{bookAvailability}"/>
+                <span th:if="${#fields.hasErrors('bookAvailability')}" th:errors="*{bookAvailability}" th:class="help-block">Book Availability Errors</span>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-default">Submit</button>
+
+    </form>
+    <a th:href="@{/books}">Back To List</a>
+</div>
+
+</body>
+</html>
