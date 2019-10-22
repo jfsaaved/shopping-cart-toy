@@ -1,48 +1,42 @@
 package com.jfsaaved.shopping.service;
 
 import com.jfsaaved.shopping.modules.Book;
+import com.jfsaaved.shopping.modules.CD;
+import com.jfsaaved.shopping.modules.Item;
 import com.jfsaaved.shopping.repository.BookRepository;
+import com.jfsaaved.shopping.repository.CDRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 @Service
-public class BookService {
+public class ItemService {
 
+    @Autowired
     private BookRepository bookRepository;
 
     @Autowired
-    public BookService(BookRepository bookRepository){
-        this.bookRepository = bookRepository;
-    }
+    private CDRepository cdRepository;
 
-    public ArrayList<Book> filterByTitleAndAuthor(String filter){
+    public ArrayList<Item> filterByTitleAndAuthorAndArtist(String filter){
         if(filter == null) filter = "";
-        ArrayList<Book> result = new ArrayList<>();
+        ArrayList<Item> result = new ArrayList<>();
         for(Book book : bookRepository.findAll()){
             if(book.getName().toLowerCase().contains(filter.toLowerCase())
                 || book.getAuthor().toLowerCase().contains(filter.toLowerCase())){
                 result.add(book);
             }
         }
+
+        for(CD cd : cdRepository.findAll()){
+            if(cd.getName().toLowerCase().contains(filter.toLowerCase())
+                || cd.getArtist().toLowerCase().contains(filter.toLowerCase())){
+                result.add(cd);
+            }
+        }
         return result;
-    }
-
-    public void save(Book book){
-        bookRepository.save(book);
-    }
-
-    public Book get(Long id) {
-        return bookRepository.findById(id).orElse(null);
-    }
-
-    public void delete(Book book){
-        bookRepository.delete(book);
-    }
-
-    public Iterable<Book> list(){
-        return bookRepository.findAll();
     }
 
 }

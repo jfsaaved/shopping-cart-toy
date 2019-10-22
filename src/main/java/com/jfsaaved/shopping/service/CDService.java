@@ -5,6 +5,8 @@ import com.jfsaaved.shopping.repository.CDRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
 public class CDService {
 
@@ -13,6 +15,18 @@ public class CDService {
     @Autowired
     public CDService(CDRepository cdRepository){
         this.cdRepository = cdRepository;
+    }
+
+    public ArrayList<CD> filterByTitleAndArtist(String filter){
+        if(filter == null) filter = "";
+        ArrayList<CD> result = new ArrayList<>();
+        for(CD cd : cdRepository.findAll()){
+            if(cd.getName().toLowerCase().contains(filter.toLowerCase())
+                || cd.getArtist().toLowerCase().contains(filter.toLowerCase())){
+                result.add(cd);
+            }
+        }
+        return result;
     }
 
     public void save(CD cd){
