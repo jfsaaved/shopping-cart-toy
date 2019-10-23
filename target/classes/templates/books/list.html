@@ -12,7 +12,7 @@
 <body>
 
 <div layout:fragment="content">
-    <table class="table table-hover">
+    <table class="table table-hover" id="item-table">
         <thead>
             <th></th>
             <th>ID</th>
@@ -23,7 +23,7 @@
             <th>Available In</th>
         </thead>
         <tbody>
-            <tr th:each="book : ${books}">
+            <tr th:each="book : ${books}" class="clickable-row" th:onclick="'javascript:rowClicked(\'' + ${book.id} + '\');'">
                 <td><img th:src="${book.imgUrl}" class="img-fluid" style="width:75px; height;225px" ></td>
                 <td th:text="${book.id}"></td>
                 <td th:text="${book.name}"></td>

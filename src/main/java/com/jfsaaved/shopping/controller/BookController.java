@@ -9,13 +9,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 
 @Controller
 public class BookController {
 
     @Autowired
-    BookService bookService;
+    private BookService bookService;
 
     @GetMapping("/books")
     public String list(Model model, @RequestParam(value = "filter", required =  false) String filter){
@@ -25,11 +24,9 @@ public class BookController {
     }
 
     @RequestMapping("/books/{id}")
-    public String view(@PathVariable Long id, Model model){
-        ArrayList<Book> books = new ArrayList<>();
-        books.add(bookService.get(id));
-        model.addAttribute("books", books);
-        return "books/list";
+    public String view(Model model, @PathVariable Long id){
+        model.addAttribute("book", bookService.get(id));
+        return "books/view";
     }
 
     @RequestMapping("/books/edit/{id}")

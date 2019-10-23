@@ -20,6 +20,20 @@ public class ItemService {
     @Autowired
     private CDRepository cdRepository;
 
+    public Item get(Long id) {
+        ArrayList<Item> items = new ArrayList<>();
+        for(Book b: bookRepository.findAll())
+            items.add(b);
+        for(CD c : cdRepository.findAll())
+            items.add(c);
+
+        Item result = null;
+        for(Item item : items)
+            if(item.getId() == id)
+                result = item;
+        return result;
+    }
+
     public ArrayList<Item> filterByTitleAndAuthorAndArtist(String filter){
         if(filter == null) filter = "";
         ArrayList<Item> result = new ArrayList<>();

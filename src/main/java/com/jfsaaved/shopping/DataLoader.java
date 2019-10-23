@@ -2,10 +2,12 @@ package com.jfsaaved.shopping;
 
 import com.jfsaaved.shopping.modules.Book;
 import com.jfsaaved.shopping.modules.CD;
+import com.jfsaaved.shopping.modules.ShoppingCart;
 import com.jfsaaved.shopping.modules.enums.BookAvailability;
 import com.jfsaaved.shopping.modules.enums.CDGenre;
 import com.jfsaaved.shopping.service.BookService;
 import com.jfsaaved.shopping.service.CDService;
+import com.jfsaaved.shopping.service.ShoppingCartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
@@ -16,17 +18,20 @@ public class DataLoader {
 
     private BookService bookService;
     private CDService cdService;
+    private ShoppingCartService shoppingCartService;
 
     @Autowired
-    public DataLoader(BookService bookService, CDService cdService) {
+    public DataLoader(BookService bookService, CDService cdService, ShoppingCartService shoppingCartService) {
         this.bookService = bookService;
         this.cdService = cdService;
+        this.shoppingCartService = shoppingCartService;
     }
 
     @PostConstruct
-    public void loadDate(){
+    public void loadData(){
         loadBooks();
         loadCDs();
+        loadShoppingCarts();
     }
 
     private void loadBooks() {
@@ -98,6 +103,13 @@ public class DataLoader {
         cdService.save(cd1);
         cdService.save(cd2);
         cdService.save(cd3);
+    }
+
+    private void loadShoppingCarts(){
+        ShoppingCart shoppingCart = new ShoppingCart();
+        ShoppingCart shoppingCart2 = new ShoppingCart();
+        shoppingCartService.save(shoppingCart);
+        shoppingCartService.save(shoppingCart2);
     }
 
 }

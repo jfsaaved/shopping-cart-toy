@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html lang="en"
+      xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layouts/main.html}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Shopping Cart - Julian Saavedra</title>
+</head>
+
+<body>
+
+<div layout:fragment="content">
+    <table class="table w-75" id="item-table">
+        <th rowspan="8"><img th:src="${book.imgUrl}" class="img-fluid" style="width:380px; height;500px" ></th>
+        <th colspan="2">Book Title</th>
+        <tr tclass="clickable-row">
+            <td colspan="2" th:text="${book.name}"></td>
+        </tr>
+        <tr>
+            <th>ISBN</th>
+            <th>Price</th>
+        </tr>
+        <tr>
+            <td th:text="${book.isbn}"></td>
+            <td th:text="'$' + ${book.price}"></td>
+        </tr>
+        <tr>
+            <th>Author</th>
+            <th>Available In</th>
+        </tr>
+        <tr>
+            <td th:text="${book.author}"></td>
+            <td th:text="${book.bookAvailability.name}"></td>
+        </tr>
+        <tr colspan="2">
+            <th>Description</th>
+            <td th:text="${book.description}"></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <a th:href="@{/shoppingCart/9?add=} + ${book.id}" id="addToCartButton" class="btn btn-outline-success" type="submit">Add To Cart</a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>

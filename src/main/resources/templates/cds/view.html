@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html lang="en"
+      xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layouts/main.html}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Shopping Cart - Julian Saavedra</title>
+</head>
+
+<body>
+
+<div layout:fragment="content">
+    <table class="table w-75" id="item-table">
+        <th rowspan="8"><img th:src="${cd.imgUrl}" class="img-fluid" style="width:380px; height;500px" ></th>
+        <th colspan="2">CD Title</th>
+        <tr tclass="clickable-row">
+            <td colspan="2" th:text="${cd.name}"></td>
+        </tr>
+        <tr>
+            <th>ASIN</th>
+            <th>Price</th>
+        </tr>
+        <tr>
+            <td th:text="${cd.asin}"></td>
+            <td th:text="'$' + ${cd.price}"></td>
+        </tr>
+        <tr>
+            <th>Artist</th>
+            <th>Label</th>
+        </tr>
+        <tr>
+            <td th:text="${cd.artist}"></td>
+            <td th:text="${cd.label}"></td>
+        </tr>
+        <tr colspan="2">
+            <th>Description</th>
+            <td th:text="${cd.description}"></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <a id="addToCartButton" class="btn btn-outline-success" type="submit">Add To Cart</a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>

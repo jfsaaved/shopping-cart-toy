@@ -18,6 +18,7 @@ public class BookService {
     }
 
     public ArrayList<Book> filterByTitleAndAuthor(String filter){
+
         if(filter == null) filter = "";
         ArrayList<Book> result = new ArrayList<>();
         for(Book book : bookRepository.findAll()){
