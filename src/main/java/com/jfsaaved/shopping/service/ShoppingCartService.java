@@ -28,15 +28,15 @@ public class ShoppingCartService {
         shoppingCartRepository.save(shoppingCart);
     }
 
-    public void saveItem(Long shoppingCartID, Item item){
+    public void saveItem(Long shoppingCartID, Item item, int quantity){
         ShoppingCart shoppingCartReference = shoppingCartRepository.findById(shoppingCartID).orElse(null);
-        ShoppingCartItem newItem = new ShoppingCartItem(item, new Date(), shoppingCartReference);
+        ShoppingCartItem newItem = new ShoppingCartItem(item, new Date(), shoppingCartReference, quantity);
 
         boolean added = false;
         for (ShoppingCartItem shoppingCartItem : shoppingCartReference.getShoppingCartItems()) {
             if (shoppingCartItem.getItem().getId().equals(item.getId())) {
                 newItem = shoppingCartItem;
-                newItem.setQuantity(newItem.getQuantity() + 1);
+                newItem.setQuantity(newItem.getQuantity() + quantity);
                 shoppingCartItemRepository.save(newItem);
                 added = true;
             }
@@ -55,6 +55,12 @@ public class ShoppingCartService {
 
     public List<ShoppingCartItem> getShoppingCartItems(Long shoppingCartID){
         return shoppingCartRepository.findById(shoppingCartID).orElse(null).getShoppingCartItems();
+    }
+
+    public void emptyShoppingCart(Long shoppingCartID){
+        ShoppingCart shoppingCart = shoppingCartRepository.findById(shoppingCartID).orElse(null);
+        shoppingCart.getShoppingCartItems().clear();
+        shoppingCartRepository.save(shoppingCart);
     }
 
 }

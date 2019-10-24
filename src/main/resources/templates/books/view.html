@@ -39,9 +39,15 @@
             <td th:text="${book.description}"></td>
         </tr>
         <tr>
-            <td colspan="2">
-                <a th:href="@{/shoppingCart/9?add=} + ${book.id}" id="addToCartButton" class="btn btn-outline-success" type="submit">Add To Cart</a>
-            </td>
+            <form th:action="@{/shoppingCart/} + ${userShoppingCartID}">
+                <td>
+                    <input type="number" th:name="quantity" value="1"/>
+                    <input type="hidden" th:name="add" th:value="${book.id}"/>
+                </td>
+                <td>
+                    <button class="btn btn-outline-success" type="submit">Add To Cart</button>
+                </td>
+            </form>
         </tr>
     </table>
 </div>

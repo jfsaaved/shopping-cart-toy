@@ -16,7 +16,7 @@
 
     <div th:if="${contents.getNrOfElements() == 0}" class="alert alert-warning" role="alert">Shopping Cart Empty</div>
 
-    <table th:if="${contents.getNrOfElements() > 0}" class="table table-hover">
+    <table th:if="${contents.getNrOfElements() > 0}" class="table">
         <thead >
             <th></th>
             <th>ID</th>
@@ -25,6 +25,7 @@
             <th>Item Type</th>
             <th>Quantity</th>
             <th>Date Added</th>
+            <th>Total</th>
         </thead>
         <tbody>
         <tr th:each="content : ${contents.pageList}">
@@ -35,6 +36,24 @@
             <td th:text="${content.item.itemType}"></td>
             <td th:text="${content.quantity}"></td>
             <td th:text="${content.dateAdded}"></td>
+            <td th:text="'$' + ${content.item.price} * ${content.quantity}"></td>
+        </tr>
+        <tr>
+            <td colspan="6"></td>
+            <td>Total: </td>
+            <td th:text="'$' + ${total}">$0</td>
+        </tr>
+        <tr>
+            <form th:action="@{/users/10}">
+                <td colspan="6"></td>
+                <td>
+                    <input type="hidden" th:name="shoppingCartItems" th:value="${listOfIDs}"/>
+                    <input type="hidden" th:name="wallet" th:value="${wallet} - ${total}"/>
+                </td>
+                <td>
+                    <button class="btn btn-outline-success" type="submit">Check Out</button>
+                </td>
+            </form>
         </tr>
         </tbody>
     </table>

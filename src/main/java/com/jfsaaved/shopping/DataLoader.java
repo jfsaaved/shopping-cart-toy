@@ -3,11 +3,13 @@ package com.jfsaaved.shopping;
 import com.jfsaaved.shopping.modules.Book;
 import com.jfsaaved.shopping.modules.CD;
 import com.jfsaaved.shopping.modules.ShoppingCart;
+import com.jfsaaved.shopping.modules.User;
 import com.jfsaaved.shopping.modules.enums.BookAvailability;
 import com.jfsaaved.shopping.modules.enums.CDGenre;
 import com.jfsaaved.shopping.service.BookService;
 import com.jfsaaved.shopping.service.CDService;
 import com.jfsaaved.shopping.service.ShoppingCartService;
+import com.jfsaaved.shopping.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
@@ -19,12 +21,14 @@ public class DataLoader {
     private BookService bookService;
     private CDService cdService;
     private ShoppingCartService shoppingCartService;
+    private UserService userService;
 
     @Autowired
-    public DataLoader(BookService bookService, CDService cdService, ShoppingCartService shoppingCartService) {
+    public DataLoader(BookService bookService, CDService cdService, ShoppingCartService shoppingCartService, UserService userService) {
         this.bookService = bookService;
         this.cdService = cdService;
         this.shoppingCartService = shoppingCartService;
+        this.userService = userService;
     }
 
     @PostConstruct
@@ -108,9 +112,10 @@ public class DataLoader {
 
     private void loadShoppingCarts(){
         ShoppingCart shoppingCart = new ShoppingCart();
-        ShoppingCart shoppingCart1 = new ShoppingCart();
+        User user = new User("Julian","123","julian@email.com", BigDecimal.valueOf(500.00),shoppingCart);
+
         shoppingCartService.save(shoppingCart);
-        shoppingCartService.save(shoppingCart1);
+        userService.save(user);
     }
 
 }

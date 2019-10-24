@@ -22,12 +22,12 @@
                     <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li th:class="${controllerName == 'Account'} ? 'nav-item active' : 'nav-item'"    >
-                    <a class="nav-link" href="/">Account <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/users/10">Account <span class="sr-only">(current)</span></a>
                 </li>
                 <li th:class="${controllerName == 'Shopping Cart'} ? 'nav-item active' : 'nav-item'"    >
                     <a class="nav-link" href="/shoppingCart/9">Shopping Cart <span class="sr-only">(current)</span></a>
                 </li>
-                <li th:class="${controllerName == 'LandingPage' || controllerName == 'Shopping Cart'} ? 'nav-item dropdown' : 'nav-item dropdown active'">
+                <li th:class="${controllerName == 'LandingPage' || controllerName == 'Shopping Cart' || controllerName == 'Account'} ? 'nav-item dropdown' : 'nav-item dropdown active'">
                     <a th:text="${controllerName != 'Books' || controllerName != 'CDs' || controllerName != 'All Items'} ? 'Catalog' : ${controllerName}" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Catalog
                     </a>
