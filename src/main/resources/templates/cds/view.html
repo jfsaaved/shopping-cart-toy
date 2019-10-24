@@ -40,7 +40,7 @@
         </tr>
         <tr>
             <td colspan="2">
-                <a id="addToCartButton" class="btn btn-outline-success" type="submit">Add To Cart</a>
+                <a th:href="@{/shoppingCart/9?add=} + ${cd.id}" id="addToCartButton" class="btn btn-outline-success" type="submit">Add To Cart</a>
             </td>
         </tr>
     </table>

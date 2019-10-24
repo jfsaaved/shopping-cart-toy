@@ -76,6 +76,7 @@ public class DataLoader {
         bookService.save(book3);
         bookService.save(book4);
         bookService.save(book5);
+
     }
 
     private void loadCDs(){
@@ -107,9 +108,9 @@ public class DataLoader {
 
     private void loadShoppingCarts(){
         ShoppingCart shoppingCart = new ShoppingCart();
-        ShoppingCart shoppingCart2 = new ShoppingCart();
+        ShoppingCart shoppingCart1 = new ShoppingCart();
         shoppingCartService.save(shoppingCart);
-        shoppingCartService.save(shoppingCart2);
+        shoppingCartService.save(shoppingCart1);
     }
 
 }

@@ -1,6 +1,6 @@
 package com.jfsaaved.shopping.controller;
 
-import com.jfsaaved.shopping.modules.Item;
+import com.jfsaaved.shopping.modules.ShoppingCartItem;
 import com.jfsaaved.shopping.service.ItemService;
 import com.jfsaaved.shopping.service.ShoppingCartService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 @Controller
@@ -22,18 +21,13 @@ public class ShoppingCartController {
     private ShoppingCartService shoppingCartService;
 
     @RequestMapping("/shoppingCart/{shoppingCartID}")
-    public String add(Model model, @PathVariable Long shoppingCartID, @RequestParam(value="add", required=false) Long id){
-
-        if(id != null) shoppingCartService.update(shoppingCartID,id);
-
-        ArrayList<Item> items = new ArrayList<>();
-        for(Long itemID : shoppingCartService.get(shoppingCartID).getItemsToBuy()) {
-            items.add(itemService.get(itemID.longValue()));
+    public String add(Model model, @PathVariable Long shoppingCartID, @RequestParam(value="add", required=false) Long itemID){
+        if(itemID != null) { // we add an item
+            shoppingCartService.saveItem(shoppingCartID,itemService.get(itemID));
         }
-
-        PagedListHolder<Item> pagedItems = new PagedListHolder<>(items);
+        PagedListHolder<ShoppingCartItem> pagedShoppingCartItems = new PagedListHolder<>(shoppingCartService.getShoppingCartItems(shoppingCartID));
         model.addAttribute("controllerName", "Shopping Cart");
-        model.addAttribute("contents", pagedItems);
+        model.addAttribute("contents",pagedShoppingCartItems);
         return "shopping-cart/view";
     }
 

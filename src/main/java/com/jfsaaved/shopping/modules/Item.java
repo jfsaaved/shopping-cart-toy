@@ -6,7 +6,8 @@ import com.jfsaaved.shopping.modules.enums.WarrantyType;
 import javax.persistence.*;
 import java.math.BigDecimal;
 
-@MappedSuperclass
+@Entity
+@Inheritance
 public abstract class Item   {
 
     @Id
