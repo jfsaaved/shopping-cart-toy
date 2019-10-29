@@ -29,7 +29,7 @@ public class BookController {
 
     @RequestMapping("/books/{id}")
     public String view(Model model, @PathVariable Long id){
-        model.addAttribute("userShoppingCartID", userService.getUserShoppingCart(Long.valueOf(10)).getId());
+        model.addAttribute("userShoppingCartID", userService.getUserShoppingCart(Long.valueOf(2)).getId());
         model.addAttribute("book", bookService.get(id));
         return "books/view";
     }

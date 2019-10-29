@@ -1,6 +1,5 @@
 package com.jfsaaved.shopping.controller;
 
-import com.jfsaaved.shopping.modules.ShoppingCart;
 import com.jfsaaved.shopping.modules.ShoppingCartItem;
 import com.jfsaaved.shopping.service.ItemService;
 import com.jfsaaved.shopping.service.ShoppingCartService;
@@ -48,7 +47,7 @@ public class ShoppingCartController {
         model.addAttribute("contents",pagedShoppingCartItems);
         model.addAttribute("total",total);
         model.addAttribute("listOfIDs", listOfItemIDs);
-        model.addAttribute("wallet",userService.getByID(Long.valueOf(10)).getWallet());
+        model.addAttribute("wallet",userService.getByID(Long.valueOf(2)).getWallet());
         return "shopping-cart/view";
     }
 

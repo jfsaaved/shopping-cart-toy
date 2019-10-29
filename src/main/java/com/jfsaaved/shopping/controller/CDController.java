@@ -28,7 +28,7 @@ public class CDController {
 
     @RequestMapping("/cds/{id}")
     public String view(Model model, @PathVariable Long id){
-        model.addAttribute("userShoppingCartID", userService.getUserShoppingCart(Long.valueOf(10)).getId());
+        model.addAttribute("userShoppingCartID", userService.getUserShoppingCart(Long.valueOf(2)).getId());
         model.addAttribute("cd", cdService.get(id));
         return "cds/view";
     }

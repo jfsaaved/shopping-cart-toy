@@ -15,8 +15,8 @@
     <table class="table table-hover" id="item-table">
         <thead>
         <th></th>
-        <th>ID</th>
-        <th>Title</th>
+        <th colspan="2">ID</th>
+        <th colspan="2">Title</th>
         <th>Price</th>
         <th>Item Type</th>
         </thead>
@@ -24,7 +24,9 @@
         <tr th:each="item : ${items}" class="clickable-row" th:data-itemType="${item.itemType.value}" th:onclick="'javascript:rowClicked2(this.getAttribute(\'data-itemType\'),' + ${item.id} + ');'">
             <td><img th:src="${item.imgUrl}" class="img-fluid" style="width:75px; height;225px" ></td>
             <td th:text="${item.id}"></td>
+            <td th:text="${item.itemType.value == 'cd'} ? 'ASIN ' + ${item.asin} : 'ISBN ' + ${item.isbn}"></td>
             <td th:text="${item.name}"></td>
+            <td th:text="${item.itemType.value == 'cd'} ? 'by ' + ${item.artist} : 'by ' + ${item.author}"></td>
             <td th:text="'$' + ${item.price}"></td>
             <td th:text="${item.itemType}"></td>
         </tr>

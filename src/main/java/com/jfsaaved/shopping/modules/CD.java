@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 
 @Entity
@@ -15,6 +16,7 @@ public class CD extends Item{
     private String asin;
     private CDGenre cdGenre;
     private String artist;
+    private ArrayList<String> artists;
     private String label;
     @DateTimeFormat(pattern="MM/dd/yyyy HH:mm:ss")
     private Date datePublished;
@@ -30,6 +32,11 @@ public class CD extends Item{
         this.artist = "Anonymous";
         this.label = "Not Available";
         this.datePublished = new Date();
+    }
+
+    public CD withArtists(ArrayList<String> artists){
+        this.artists = artists;
+        return this;
     }
 
     public CD withCDGenre(CDGenre cdGenre){
@@ -120,6 +127,14 @@ public class CD extends Item{
 
     public void setDatePublished(Date datePublished) {
         this.datePublished = datePublished;
+    }
+
+    public ArrayList<String> getArtists() {
+        return artists;
+    }
+
+    public void setArtists(ArrayList<String> artists) {
+        this.artists = artists;
     }
 
 }

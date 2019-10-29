@@ -8,7 +8,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Book extends Item{
@@ -16,6 +18,7 @@ public class Book extends Item{
     private BookGenre genre;
     private String isbn;
     private String author;
+    private ArrayList<String> authors;
     @DateTimeFormat(pattern="MM/dd/yyyy HH:mm:ss")
     private Date datePublished;
     private int pages;
@@ -33,6 +36,11 @@ public class Book extends Item{
         this.datePublished = new Date();
         this.pages = 0;
         this.bookAvailability = BookAvailability.PAPERBACK;
+    }
+
+    public Book withAuthors(ArrayList<String> authors){
+        this.authors = authors;
+        return this;
     }
 
     public Book withGenre(BookGenre genre){
@@ -138,4 +146,11 @@ public class Book extends Item{
         this.bookAvailability = bookAvailability;
     }
 
+    public ArrayList<String> getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(ArrayList<String> authors) {
+        this.authors = authors;
+    }
 }

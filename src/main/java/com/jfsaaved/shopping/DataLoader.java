@@ -11,9 +11,18 @@ import com.jfsaaved.shopping.service.CDService;
 import com.jfsaaved.shopping.service.ShoppingCartService;
 import com.jfsaaved.shopping.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Collections;
 
 @Component
 public class DataLoader {
@@ -22,95 +31,97 @@ public class DataLoader {
     private CDService cdService;
     private ShoppingCartService shoppingCartService;
     private UserService userService;
+    private ResourceLoader resourceLoader;
 
     @Autowired
-    public DataLoader(BookService bookService, CDService cdService, ShoppingCartService shoppingCartService, UserService userService) {
+    public DataLoader(BookService bookService, CDService cdService, ShoppingCartService shoppingCartService, UserService userService,
+                      ResourceLoader resourceLoader) {
         this.bookService = bookService;
         this.cdService = cdService;
         this.shoppingCartService = shoppingCartService;
         this.userService = userService;
+        this.resourceLoader = resourceLoader;
     }
 
     @PostConstruct
     public void loadData(){
-        loadBooks();
-        loadCDs();
-        loadShoppingCarts();
+        loadUsers();
+        loadContents();
+        loadDiscounts();
     }
 
-    private void loadBooks() {
-        Book book1 = new Book("Spring Boot In Action",
-                "9781617292545")
-                .withPrice(BigDecimal.valueOf(35.99))
-                .withAuthor("Craig Walls")
-                .withBookAvailability(BookAvailability.ELECTRONIC)
-                .withImgUrl("http://t2.gstatic.com/images?q=tbn:ANd9GcQF3IMqPXyLb7pQz94LXfF3I_ysxj-9HrcdT-t_zcron181j3uN");
-
-        Book book2 = new Book("Java How to Program, Early Objects (11th Edition)",
-                "9780134743356")
-                .withPrice(BigDecimal.valueOf(133.18))
-                .withAuthor("Paul Deitel")
-                .withBookAvailability(BookAvailability.ELECTRONIC)
-                .withImgUrl("https://images-na.ssl-images-amazon.com/images/I/51frYIzwS1L._SX379_BO1,204,203,200_.jpg");
-
-        Book book3 = new Book("Java: How to Program, 8th Edition",
-                "9781617292545")
-                .withPrice(BigDecimal.valueOf(9.97))
-                .withAuthor("Paul Deitel")
-                .withImgUrl("https://images-na.ssl-images-amazon.com/images/I/61qu2GwFyUL._SX383_BO1,204,203,200_.jpg");
-
-        Book book4 = new Book("Java in easy steps",
-                "9781840788730")
-                .withPrice(BigDecimal.valueOf(15.99))
-                .withAuthor("Mike McGrath")
-                .withPages(192)
-                .withImgUrl("https://images-na.ssl-images-amazon.com/images/I/51DFCXTTYkL._SX408_BO1,204,203,200_.jpg");
-
-        Book book5 = new Book("Java in easy steps",
-                "9781840788730")
-                .withPrice(BigDecimal.valueOf(8.99))
-                .withAuthor("Mike McGrath")
-                .withPages(192)
-                .withBookAvailability(BookAvailability.ELECTRONIC)
-                .withImgUrl("https://images-na.ssl-images-amazon.com/images/I/51DFCXTTYkL._SX408_BO1,204,203,200_.jpg");
-
-
-        bookService.save(book1);
-        bookService.save(book2);
-        bookService.save(book3);
-        bookService.save(book4);
-        bookService.save(book5);
-
+    private ArrayList<String> getAuthors(String authors){
+        String[] by = authors.split(",");
+        ArrayList<String> byList = new ArrayList<>();
+        Collections.addAll(byList, by);
+        return byList;
     }
 
-    private void loadCDs(){
-        CD cd1 = new CD("Portrait in Jazz","B0012X6FR6")
-                .withPrice(BigDecimal.valueOf(16.75))
-                .withArtist("Bill Evans")
-                .withCDGenre(CDGenre.JAZZ)
-                .withLabel("Universal Music Canada")
-                .withImgUrl("https://images-na.ssl-images-amazon.com/images/I/71dFfKovRmL._SL1199_.jpg");
+    private String getAuthorString(String authors){
+        String[] by = authors.split(",");
+        ArrayList<String> byList = new ArrayList<>();
 
-        CD cd2 = new CD("Kind of Blue", "B0041TM5OU")
-                .withPrice(BigDecimal.valueOf(34.10))
-                .withArtist("Miles Davis")
-                .withCDGenre(CDGenre.JAZZ)
-                .withLabel("Sony Music Canada Entertainment Inc.")
-                .withImgUrl("https://images-na.ssl-images-amazon.com/images/I/81CP1j-zprL._SL1500_.jpg");
+        StringBuilder sb = new StringBuilder();
+        boolean first = true;
+        for(String item : by){
+            if(first) {
+                sb.append(item);
+                first = false;
+            } else  sb.append( " & " ).append(item);
+        }
 
-        CD cd3 = new CD("Blue Train", "B00HG30CD4")
-                .withPrice(BigDecimal.valueOf(24.99))
-                .withArtist("John Coltrane")
-                .withCDGenre(CDGenre.JAZZ)
-                .withLabel("Universal Music Canada")
-                .withImgUrl("https://images-na.ssl-images-amazon.com/images/I/81RQvViP0dL._SL1400_.jpg");
-
-        cdService.save(cd1);
-        cdService.save(cd2);
-        cdService.save(cd3);
+        return sb.toString();
     }
 
-    private void loadShoppingCarts(){
+    private void loadContents(){
+        Resource resource = resourceLoader.getResource("classpath:static/csv/contents.dat");
+        try {
+            File file = resource.getFile();
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String temp = br.readLine();
+
+            while(temp != null){
+                String[] array = temp.split("    ");
+                temp = br.readLine();
+
+                // itemType,isbn,name,author,description,price,imgurl
+                //  0        1    2    3        4         5      6
+                if(array[0].equals("Book")) {
+                    Book book = new Book(array[2], array[1])
+                            .withPrice(BigDecimal.valueOf(Double.parseDouble(array[5])))
+                            .withAuthor(getAuthorString(array[3]))
+                            .withImgUrl(array[6])
+                            .withDescription(array[4])
+                            .withAuthors(getAuthors(array[3]));
+                    bookService.save(book);
+
+                }
+                // itemType,asin,name,author,label,price,imgurl
+                //  0        1    2    3        4    5      6
+                else if(array[0].equals("CD")){
+                    CD cd = new CD(array[2], array[1])
+                            .withPrice(BigDecimal.valueOf(Double.parseDouble(array[5])))
+                            .withArtist(getAuthorString(array[3]))
+                            .withImgUrl(array[6])
+                            .withLabel(array[4])
+                            .withArtists(getAuthors(array[3]));
+                    cdService.save(cd);
+                }
+            }
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadDiscounts(){
+        Book book = bookService.get((long) 3);
+        book.setDiscount(BigDecimal.valueOf(0.25));
+        book.setDiscountEligible(true);
+        bookService.save(book);
+    }
+
+    private void loadUsers(){
         ShoppingCart shoppingCart = new ShoppingCart();
         User user = new User("Julian","123","julian@email.com", BigDecimal.valueOf(500.00),shoppingCart);
 

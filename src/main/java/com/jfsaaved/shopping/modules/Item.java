@@ -17,6 +17,8 @@ public abstract class Item   {
     protected String description;
     protected BigDecimal price;
     protected BigDecimal discount;
+    protected int discountThreshold;
+    protected boolean discountEligible;
     protected WarrantyType warrantyType;
     protected ItemType itemType;
     protected String imgUrl;
@@ -33,6 +35,8 @@ public abstract class Item   {
         this.discount = BigDecimal.valueOf(0);
         this.price = BigDecimal.valueOf(0);
         this.imgUrl = "https://image.flaticon.com/icons/png/512/36/36601.png";
+        this.discountThreshold = 5;
+        this.discountEligible = false;
     }
 
     public abstract Item withDescription(String description);
@@ -105,5 +109,20 @@ public abstract class Item   {
         this.imgUrl = imgUrl;
     }
 
+    public int getDiscountThreshold() {
+        return discountThreshold;
+    }
+
+    public void setDiscountThreshold(int discountThreshold) {
+        this.discountThreshold = discountThreshold;
+    }
+
+    public boolean isDiscountEligible() {
+        return discountEligible;
+    }
+
+    public void setDiscountEligible(boolean discountEligible) {
+        this.discountEligible = discountEligible;
+    }
 
 }
