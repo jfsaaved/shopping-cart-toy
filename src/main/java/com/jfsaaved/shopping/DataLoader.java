@@ -4,14 +4,13 @@ import com.jfsaaved.shopping.modules.Book;
 import com.jfsaaved.shopping.modules.CD;
 import com.jfsaaved.shopping.modules.ShoppingCart;
 import com.jfsaaved.shopping.modules.User;
-import com.jfsaaved.shopping.modules.enums.BookAvailability;
-import com.jfsaaved.shopping.modules.enums.CDGenre;
 import com.jfsaaved.shopping.service.BookService;
 import com.jfsaaved.shopping.service.CDService;
 import com.jfsaaved.shopping.service.ShoppingCartService;
 import com.jfsaaved.shopping.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
@@ -32,6 +31,10 @@ public class DataLoader {
     private ShoppingCartService shoppingCartService;
     private UserService userService;
     private ResourceLoader resourceLoader;
+
+    private Logger logger = LoggerFactory.getLogger(DataLoader.class);
+
+    private final String token = "    ";
 
     @Autowired
     public DataLoader(BookService bookService, CDService cdService, ShoppingCartService shoppingCartService, UserService userService,
@@ -81,36 +84,18 @@ public class DataLoader {
             String temp = br.readLine();
 
             while(temp != null){
-                String[] array = temp.split("    ");
+                String[] array = temp.split(token);
                 temp = br.readLine();
-
-                // itemType,isbn,name,author,description,price,imgurl
-                //  0        1    2    3        4         5      6
-                if(array[0].equals("Book")) {
-                    Book book = new Book(array[2], array[1])
-                            .withPrice(BigDecimal.valueOf(Double.parseDouble(array[5])))
-                            .withAuthor(getAuthorString(array[3]))
-                            .withImgUrl(array[6])
-                            .withDescription(array[4])
-                            .withAuthors(getAuthors(array[3]));
-                    bookService.save(book);
-
-                }
-                // itemType,asin,name,author,label,price,imgurl
-                //  0        1    2    3        4    5      6
-                else if(array[0].equals("CD")){
-                    CD cd = new CD(array[2], array[1])
-                            .withPrice(BigDecimal.valueOf(Double.parseDouble(array[5])))
-                            .withArtist(getAuthorString(array[3]))
-                            .withImgUrl(array[6])
-                            .withLabel(array[4])
-                            .withArtists(getAuthors(array[3]));
-                    cdService.save(cd);
-                }
+                if(array[0].equals("Book")) bookService.save(parseAsBook(array));
+                else if(array[0].equals("CD")) cdService.save(parseAsCD(array));
             }
+
             br.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
+
+            Book book = new Book("Test", "12391ure0jas");
+            bookService.save(book);
         }
     }
 
@@ -121,9 +106,33 @@ public class DataLoader {
         bookService.save(book);
     }
 
+    private Book parseAsBook(String[] array){
+        // itemType,isbn,name,author,description,price,imgurl
+        //  0        1    2    3        4         5      6
+        Book book = new Book(array[2], array[1])
+                .withPrice(BigDecimal.valueOf(Double.parseDouble(array[5])))
+                .withAuthor(getAuthorString(array[3]))
+                .withImgUrl(array[6])
+                .withDescription(array[4])
+                .withAuthors(getAuthors(array[3]));
+        return book;
+    }
+
+    private CD parseAsCD(String[] array){
+        // itemType,asin,name,author,label,price,imgurl
+        //  0        1    2    3        4    5      6
+        CD cd = new CD(array[2], array[1])
+                .withPrice(BigDecimal.valueOf(Double.parseDouble(array[5])))
+                .withArtist(getAuthorString(array[3]))
+                .withImgUrl(array[6])
+                .withLabel(array[4])
+                .withArtists(getAuthors(array[3]));
+        return cd;
+    }
+
     private void loadUsers(){
         ShoppingCart shoppingCart = new ShoppingCart();
-        User user = new User("Julian","123","julian@email.com", BigDecimal.valueOf(500.00),shoppingCart);
+        User user = new User("Julian Saavedra","123-423-4924","julian.saavedra@email.com", BigDecimal.valueOf(500.00),shoppingCart);
 
         shoppingCartService.save(shoppingCart);
         userService.save(user);
