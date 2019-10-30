@@ -1,0 +1,64 @@
+2019-10-29 15:25:20,794 INFO org.springframework.boot.StartupInfoLogger [main] Starting ShoppingMain on CPX-M7LH85XMAZ4 with PID 13152 (C:\Users\julian.saavedra\Documents\Workspace\ies-canada-shopping-website\target\classes started by julian.saavedra in C:\Users\julian.saavedra\Documents\Workspace\ies-canada-shopping-website)
+2019-10-29 15:25:20,802 DEBUG org.springframework.boot.StartupInfoLogger [main] Running with Spring Boot v2.1.6.RELEASE, Spring v5.1.8.RELEASE
+2019-10-29 15:25:20,803 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to default profiles: default
+2019-10-29 15:25:23,143 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-10-29 15:25:23,346 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 179ms. Found 5 repository interfaces.
+2019-10-29 15:25:24,135 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [main] Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$b09ed5bf] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-10-29 15:25:25,315 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat initialized with port(s): 8080 (http)
+2019-10-29 15:25:25,359 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-8080"]
+2019-10-29 15:25:25,383 INFO org.apache.juli.logging.DirectJDKLog [main] Starting service [Tomcat]
+2019-10-29 15:25:25,384 INFO org.apache.juli.logging.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/9.0.21]
+2019-10-29 15:25:25,914 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
+2019-10-29 15:25:25,915 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 4457 ms
+2019-10-29 15:25:26,327 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Starting...
+2019-10-29 15:25:26,801 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Start completed.
+2019-10-29 15:25:27,096 INFO org.hibernate.jpa.internal.util.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2019-10-29 15:25:27,876 INFO org.hibernate.Version [main] HHH000412: Hibernate Core {5.3.10.Final}
+2019-10-29 15:25:27,880 INFO org.hibernate.cfg.Environment [main] HHH000206: hibernate.properties not found
+2019-10-29 15:25:28,221 INFO org.hibernate.annotations.common.reflection.java.JavaReflectionManager [main] HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
+2019-10-29 15:25:28,575 INFO org.hibernate.dialect.Dialect [main] HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2019-10-29 15:25:30,373 INFO org.hibernate.tool.schema.internal.SchemaCreatorImpl [main] HHH000476: Executing import script 'org.hibernate.tool.schema.internal.exec.ScriptSourceInputNonExistentImpl@7736c41e'
+2019-10-29 15:25:30,377 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019-10-29 15:25:31,707 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'applicationTaskExecutor'
+2019-10-29 15:25:31,799 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-10-29 15:25:32,672 INFO org.apache.juli.logging.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-8080"]
+2019-10-29 15:25:32,719 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat started on port(s): 8080 (http) with context path ''
+2019-10-29 15:25:32,722 INFO org.springframework.boot.StartupInfoLogger [main] Started ShoppingMain in 13.231 seconds (JVM running for 14.406)
+2019-10-29 15:25:42,097 INFO org.apache.juli.logging.DirectJDKLog [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-10-29 15:25:42,099 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
+2019-10-29 15:25:42,125 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-8080-exec-1] Completed initialization in 25 ms
+2019-10-29 15:25:47,969 TRACE com.jfsaaved.shopping.controller.ShoppingCartController [http-nio-8080-exec-2] A TRACE Message
+2019-10-29 15:25:47,970 DEBUG com.jfsaaved.shopping.controller.ShoppingCartController [http-nio-8080-exec-2] A DEBUG Message
+2019-10-29 15:25:47,971 INFO com.jfsaaved.shopping.controller.ShoppingCartController [http-nio-8080-exec-2] An INFO Message
+2019-10-29 15:25:47,973 WARN com.jfsaaved.shopping.controller.ShoppingCartController [http-nio-8080-exec-2] A WARN Message
+2019-10-29 15:25:47,974 ERROR com.jfsaaved.shopping.controller.ShoppingCartController [http-nio-8080-exec-2] An ERROR Message
+2019-10-29 16:40:32,456 INFO org.springframework.boot.StartupInfoLogger [main] Starting ShoppingMain on CPX-M7LH85XMAZ4 with PID 16432 (C:\Users\julian.saavedra\Documents\Workspace\ies-canada-shopping-website\target\classes started by julian.saavedra in C:\Users\julian.saavedra\Documents\Workspace\ies-canada-shopping-website)
+2019-10-29 16:40:32,466 DEBUG org.springframework.boot.StartupInfoLogger [main] Running with Spring Boot v2.1.6.RELEASE, Spring v5.1.8.RELEASE
+2019-10-29 16:40:32,468 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to default profiles: default
+2019-10-29 16:40:34,843 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-10-29 16:40:35,077 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 209ms. Found 5 repository interfaces.
+2019-10-29 16:40:35,950 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [main] Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$1b278b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-10-29 16:40:37,300 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat initialized with port(s): 8080 (http)
+2019-10-29 16:40:37,344 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-8080"]
+2019-10-29 16:40:37,385 INFO org.apache.juli.logging.DirectJDKLog [main] Starting service [Tomcat]
+2019-10-29 16:40:37,386 INFO org.apache.juli.logging.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/9.0.21]
+2019-10-29 16:40:37,850 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
+2019-10-29 16:40:37,851 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 4806 ms
+2019-10-29 16:40:38,276 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Starting...
+2019-10-29 16:40:38,700 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Start completed.
+2019-10-29 16:40:38,875 INFO org.hibernate.jpa.internal.util.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2019-10-29 16:40:39,075 INFO org.hibernate.Version [main] HHH000412: Hibernate Core {5.3.10.Final}
+2019-10-29 16:40:39,078 INFO org.hibernate.cfg.Environment [main] HHH000206: hibernate.properties not found
+2019-10-29 16:40:39,463 INFO org.hibernate.annotations.common.reflection.java.JavaReflectionManager [main] HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
+2019-10-29 16:40:39,903 INFO org.hibernate.dialect.Dialect [main] HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2019-10-29 16:40:41,899 INFO org.hibernate.tool.schema.internal.SchemaCreatorImpl [main] HHH000476: Executing import script 'org.hibernate.tool.schema.internal.exec.ScriptSourceInputNonExistentImpl@6f2a3b37'
+2019-10-29 16:40:41,906 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019-10-29 16:40:43,342 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'applicationTaskExecutor'
+2019-10-29 16:40:43,503 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-10-29 16:40:44,447 INFO org.apache.juli.logging.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-8080"]
+2019-10-29 16:40:44,518 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat started on port(s): 8080 (http) with context path ''
+2019-10-29 16:40:44,523 INFO org.springframework.boot.StartupInfoLogger [main] Started ShoppingMain in 13.131 seconds (JVM running for 15.273)
