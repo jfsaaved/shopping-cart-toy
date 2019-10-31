@@ -16,7 +16,6 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -34,7 +33,7 @@ public class DataLoader {
 
     private Logger logger = LoggerFactory.getLogger(DataLoader.class);
 
-    private final String token = "    ";
+    private static final String token = "    ";
 
     @Autowired
     public DataLoader(BookService bookService, CDService cdService, ShoppingCartService shoppingCartService, UserService userService,
@@ -62,7 +61,6 @@ public class DataLoader {
 
     private String getAuthorString(String authors){
         String[] by = authors.split(",");
-        ArrayList<String> byList = new ArrayList<>();
 
         StringBuilder sb = new StringBuilder();
         boolean first = true;
@@ -106,25 +104,23 @@ public class DataLoader {
     private Book parseAsBook(String[] array){
         // itemType,isbn,name,author,description,price,imgurl
         //  0        1    2    3        4         5      6
-        Book book = new Book(array[2], array[1])
+        return new Book(array[2], array[1])
                 .withPrice(BigDecimal.valueOf(Double.parseDouble(array[5])))
                 .withAuthor(getAuthorString(array[3]))
                 .withImgUrl(array[6])
                 .withDescription(array[4])
                 .withAuthors(getAuthors(array[3]));
-        return book;
     }
 
     private CD parseAsCD(String[] array){
         // itemType,asin,name,author,label,price,imgurl
         //  0        1    2    3        4    5      6
-        CD cd = new CD(array[2], array[1])
+        return new CD(array[2], array[1])
                 .withPrice(BigDecimal.valueOf(Double.parseDouble(array[5])))
                 .withArtist(getAuthorString(array[3]))
                 .withImgUrl(array[6])
                 .withLabel(array[4])
                 .withArtists(getAuthors(array[3]));
-        return cd;
     }
 
     private void loadUsers(){
