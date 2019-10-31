@@ -17,7 +17,16 @@ public class UserService {
     }
 
     public ShoppingCart getUserShoppingCart(Long userID){
-        return userRepository.findById(userID).orElse(null).getShoppingCart();
+        User user = userRepository.findById(userID).orElse(null);
+        if(user != null){
+            return user.getShoppingCart();
+        } else {
+            return null;
+        }
+    }
+
+    public User findByName(String name){
+        return userRepository.findByName(name);
     }
 
     public User getByID(Long id){

@@ -27,7 +27,7 @@ public class ItemController {
         return "items/list";
     }
 
-    @RequestMapping("/items/{id}")
+    @GetMapping("/items/{id}")
     public String view(Model model, @PathVariable Long id){
         model.addAttribute("item", itemService.get(id));
         return "items/view";

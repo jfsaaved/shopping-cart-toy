@@ -29,7 +29,7 @@ public class ItemService {
 
         Item result = null;
         for(Item item : items)
-            if(item.getId() == id)
+            if(item.getId().equals(id))
                 result = item;
         return result;
     }

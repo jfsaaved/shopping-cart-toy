@@ -30,7 +30,7 @@ public class ShoppingCartController {
 
     private Logger logger = LoggerFactory.getLogger(ShoppingCartController.class);
 
-    @RequestMapping("/shoppingCart/{shoppingCartID}")
+    @GetMapping("/shoppingCart/{shoppingCartID}")
     public String add(Model model, @PathVariable Long shoppingCartID, @RequestParam(value="quantity", required = false) Integer quantity, @RequestParam(value="add", required=false) Long itemID){
         if(itemID != null) { // we add an item
             if(quantity != null)

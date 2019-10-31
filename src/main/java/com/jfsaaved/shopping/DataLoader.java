@@ -76,11 +76,9 @@ public class DataLoader {
         return sb.toString();
     }
 
-    private void loadContents(){
+    private void loadContents() {
         Resource resource = resourceLoader.getResource("classpath:static/csv/contents.dat");
-        try {
-            File file = resource.getFile();
-            BufferedReader br = new BufferedReader(new FileReader(file));
+        try (BufferedReader br = new BufferedReader(new FileReader(resource.getFile()))){
             String temp = br.readLine();
 
             while(temp != null){
@@ -90,7 +88,6 @@ public class DataLoader {
                 else if(array[0].equals("CD")) cdService.save(parseAsCD(array));
             }
 
-            br.close();
         } catch (IOException e) {
             logger.error(e.getMessage(), e);
 
